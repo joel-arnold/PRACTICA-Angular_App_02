@@ -69,23 +69,26 @@ export class HeroesService {
     return this.heroes;
   }
 
-  getHero(indice:number): Heroe{
-    return this.heroes[indice]
+  getHero(indice: number): Heroe {
+    return this.heroes[indice];
   }
 
-  buscarHeroes(textoBusqueda: string): Heroe[]{
-    let heroesArreglo: Heroe[] = []
-    textoBusqueda = textoBusqueda.toLowerCase()
+  buscarHeroes(textoBusqueda: string): Heroe[] {
+    let heroesArreglo: Heroe[] = [];
+    textoBusqueda = textoBusqueda.toLowerCase();
 
-    for(let heroe of this.heroes){
-      let nombre = heroe.nombre.toLowerCase()
+    for (let i = 0; i < this.heroes.length; i++) {
+      
+      let heroe = this.heroes[i]
+      let nombre = heroe.nombre.toLowerCase();
 
-      if(nombre.indexOf(textoBusqueda) >= 0){
-        heroesArreglo.push(heroe)
+      if (nombre.indexOf(textoBusqueda) >= 0) {
+        heroe.indice = i
+        heroesArreglo.push(heroe);
       }
     }
     // console.log(heroesArreglo);
-    return heroesArreglo
+    return heroesArreglo;
   }
 }
 
@@ -95,4 +98,5 @@ export interface Heroe {
   img: string;
   aparicion: string;
   casa: string;
+  indice?: number;
 }
